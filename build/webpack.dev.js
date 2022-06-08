@@ -1,4 +1,5 @@
 // webpack.dev.js
+const path = require('path')
 const webpack = require('webpack')
 const { merge } = require('webpack-merge')
 const baseConfig = require('./webpack.base.js')
@@ -12,6 +13,9 @@ module.exports = merge(baseConfig, {
     // 解决路由跳转404问题
     historyApiFallback: true,
     hot: true,
+    static: { //托管静态资源文件
+      directory: path.join(__dirname, "../public"),
+    }
   },
   devtool: 'cheap-module-source-map'
 })

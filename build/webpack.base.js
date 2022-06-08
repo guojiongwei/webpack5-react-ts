@@ -1,9 +1,11 @@
 // webpack.base.js
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
+const TerserPlugin = require('terser-webpack-plugin');
 
 module.exports = {
-  target: 'web',
   // 入口文件
   entry: path.resolve(__dirname, '../src/index.tsx'),
   // 打包文件出口
@@ -19,16 +21,73 @@ module.exports = {
       {
         test: /\.(ts|tsx)$/,
         include: path.resolve(__dirname,'../src'),
+        use: [
+          'thread-loader',
+          {
+            loader: 'babel-loader',
+            options: {
+              cacheDirectory: true, // 启用缓存
+              presets: [
+                '@babel/preset-react',
+                '@babel/preset-typescript'
+              ]
+            }
+          }
+        ]
+      },
+      {
+        test: /\.css$/, //匹配所有的 css 文件
+        use: [
+          {
+            loader: MiniCssExtractPlugin.loader, 
+            options: {
+              publicPath: '../'
+            }
+          },
+          // 'style-loader',
+          'css-loader',
+          {
+            loader: 'postcss-loader',
+            options: {
+              postcssOptions: {
+                plugins: [ 'postrion-preset-env' ]
+              }
+            }
+          }
+        ]
+      },
+      {
+        test: /\.less$/, //匹配所有的 less 文件
+        use: [
+          {
+            loader: MiniCssExtractPlugin.loader, 
+            options: {
+              publicPath: '../'
+            }
+          },
+          // 'style-loader',
+          'css-loader',
+          'less-loader',
+          {
+            loader: 'postcss-loader',
+            options: {
+              postcssOptions: {
+                plugins: ['autoprefixer']
+              }
+            }
+          }
+        ]
+      },
+      {
+        test: /\.(png|jpg|jpeg|gif|svg)$/i,
         use: {
-          loader: 'babel-loader',
+          loader: 'url-loader',
           options: {
-            presets: [
-              '@babel/preset-react',
-              '@babel/preset-typescript'
-            ]
+            name: 'static/images/[name].[ext]',
+            limit: 10 * 1024
           }
         }
-      },
+      }
     ]
   },
   resolve: {
@@ -38,6 +97,15 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, '../public/index.html'),
       inject: true
-    })
-  ]
+    }),
+    new MiniCssExtractPlugin({ // 添加插件
+      filename: 'static/css/[name].[contenthash:8].css'
+    }),
+  ],
+  optimization: {
+    minimizer: [
+      new CssMinimizerPlugin(),
+      new TerserPlugin(),
+    ],
+  },
 }

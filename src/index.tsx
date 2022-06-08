@@ -6,7 +6,9 @@ const container = document.getElementById('root');
 const root = createRoot(container!);
 root.render(<App />)
 
-// 如果启动webpack热更新，则会执行一下代码
-if (typeof module !== 'undefined') {
-  (module as any).hot.accept()
+if (process.env.NODE_ENV === 'development' && typeof module !== 'undefined') {
+  // 当App.tsx内部依赖代码变化，就重新渲染App.tsx 
+  (module as any).hot.accept("./App.tsx", () => {
+    root.render(<App />)
+  })
 }
