@@ -4,6 +4,10 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 const TerserPlugin = require('terser-webpack-plugin');
+const webpack = require('webpack');
+
+console.log('NODE_ENV', process.env.NODE_ENV)
+console.log('BASE_ENV', process.env.BASE_ENV)
 
 module.exports = {
   // 入口文件
@@ -36,62 +40,34 @@ module.exports = {
         ]
       },
       {
-        test: /\.css$/, //匹配所有的 css 文件
+        test: /\.(css|less)$/, //匹配所有的 less 文件
         use: [
-          {
-            loader: MiniCssExtractPlugin.loader, 
-            options: {
-              publicPath: '../'
-            }
-          },
-          // 'style-loader',
+          'style-loader',
           'css-loader',
-          {
-            loader: 'postcss-loader',
-            options: {
-              postcssOptions: {
-                plugins: [ 'postrion-preset-env' ]
-              }
-            }
-          }
+          'postcss-loader',
+          'less-loader'
         ]
       },
       {
-        test: /\.less$/, //匹配所有的 less 文件
-        use: [
-          {
-            loader: MiniCssExtractPlugin.loader, 
-            options: {
-              publicPath: '../'
-            }
-          },
-          // 'style-loader',
-          'css-loader',
-          'less-loader',
-          {
-            loader: 'postcss-loader',
-            options: {
-              postcssOptions: {
-                plugins: ['autoprefixer']
-              }
-            }
+        test:/\.(png|jpg|jpeg|gif|svg)$/,
+        type: "asset",
+        parser: {
+          //转base64的条件
+          dataUrlCondition: {
+            maxSize: 10 * 1024, // 10kb
           }
-        ]
+        },
+        generator:{ 
+          filename:'static/images/[name].[contenthash:6][ext]'
+        },
       },
-      {
-        test: /\.(png|jpg|jpeg|gif|svg)$/i,
-        use: {
-          loader: 'url-loader',
-          options: {
-            name: 'static/images/[name].[ext]',
-            limit: 10 * 1024
-          }
-        }
-      }
     ]
   },
   resolve: {
-    extensions: ['.tsx', '.ts', '.js', '.jsx']
+    extensions: ['.tsx', '.ts', '.js', '.jsx'],
+    alias: {
+      '@': path.resolve(__dirname, '../src')
+    }
   },
   plugins: [
     new HtmlWebpackPlugin({
@@ -101,6 +77,9 @@ module.exports = {
     new MiniCssExtractPlugin({ // 添加插件
       filename: 'static/css/[name].[contenthash:8].css'
     }),
+    new webpack.DefinePlugin({
+      'process.env.BASE_ENV': JSON.stringify(process.env.BASE_ENV)
+    })
   ],
   optimization: {
     minimizer: [

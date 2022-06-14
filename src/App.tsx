@@ -1,11 +1,17 @@
 import React from 'react'
-import './app.less'
-import bg from './assets/bg.png'
+import smallImg from '@/assets/imgs/5kb.png'
+import bigImg from '@/assets/imgs/22kb.png'
+import '@/app.css'
+import '@/app.less'
 
 function App() {
-  return <>
-  <h2>wesbpack5-rea11ct-ts</h2>
-  <img src={bg} alt="" />
-  </>
+  return (
+    <>
+      <img src={smallImg} alt="小于10kb的图片" />
+      <img src={bigImg} alt="大于于10kb的图片" />
+      <div className='smallImg'></div>
+      <div className='bigImg'></div>
+    </>
+  )
 }
 export default App
