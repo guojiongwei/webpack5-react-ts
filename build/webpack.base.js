@@ -24,20 +24,7 @@ module.exports = {
     rules: [
       {
         test: /\.(ts|tsx)$/,
-        include: path.resolve(__dirname,'../src'),
-        use: [
-          'thread-loader',
-          {
-            loader: 'babel-loader',
-            options: {
-              cacheDirectory: true, // 启用缓存
-              presets: [
-                '@babel/preset-react',
-                '@babel/preset-typescript'
-              ]
-            }
-          }
-        ]
+        use: 'babel-loader'
       },
       {
         test: /\.(css|less)$/, //匹配所有的 less 文件
@@ -59,6 +46,30 @@ module.exports = {
         },
         generator:{ 
           filename:'static/images/[name].[contenthash:6][ext]'
+        },
+      },
+      {
+        test:/\.(woff2?|eot|ttf|otf)$/, // 匹配字体图标文件
+        type: "asset", // type选择asset
+        parser: {
+          dataUrlCondition: {
+            maxSize: 10 * 1024, // 小于10kb转base64位
+          }
+        },
+        generator:{ 
+          filename:'static/fonts/[name].[contenthash:6][ext]', // 文件输出目录和命名
+        },
+      },
+      {
+        test:/\.(mp4|webm|ogg|mp3|wav|flac|aac)$/, // 匹配媒体文件
+        type: "asset", // type选择asset
+        parser: {
+          dataUrlCondition: {
+            maxSize: 10 * 1024, // 小于10kb转base64位
+          }
+        },
+        generator:{ 
+          filename:'static/media/[name].[contenthash:6][ext]', // 文件输出目录和命名
         },
       },
     ]
