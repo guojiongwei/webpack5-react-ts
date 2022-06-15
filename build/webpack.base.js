@@ -24,7 +24,7 @@ module.exports = {
     rules: [
       {
         test: /\.(ts|tsx)$/,
-        use: 'babel-loader'
+        use: 'babel-loader?cacheDirectory=true'
       },
       {
         test: /\.(css|less)$/, //匹配所有的 less 文件
