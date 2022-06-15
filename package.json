@@ -35,7 +35,6 @@
     "@types/react-dom": "^18.0.5",
     "autoprefixer": "^10.4.7",
     "babel-loader": "^8.2.5",
-    "cache-loader": "^4.1.0",
     "copy-webpack-plugin": "^11.0.0",
     "core-js": "^3.23.0",
     "cross-env": "^7.0.3",

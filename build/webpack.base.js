@@ -15,12 +15,13 @@ module.exports = {
     path: path.resolve(__dirname, '../dist'), // 打包的出口文件夹路径
     clean: true, // webpack4需要配置clean-webpack-plugin来删除dist文件， webpack5内置了。
     publicPath: '/', // 打包后文件的公共前缀路径
+    pathinfo: false,
   },
   module: {
     rules: [
       {
         test: /\.(ts|tsx)$/,
-        use: 'babel-loader?cacheDirectory=true'
+        use: 'babel-loader'
       },
       {
         test:/\.(png|jpg|jpeg|gif|svg)$/,
@@ -76,6 +77,10 @@ module.exports = {
       'process.env.BASE_ENV': JSON.stringify(process.env.BASE_ENV)
     })
   ],
+  // 开启webpack持久化存储缓存
+  cache: {
+    type: 'filesystem', // 使用文件缓存
+  },
   optimization: {
     minimizer: [
       new CssMinimizerPlugin(),

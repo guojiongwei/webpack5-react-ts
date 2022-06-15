@@ -23,7 +23,6 @@ module.exports = merge(baseConfig, {
       {
         test: /\.(css|less)$/, //匹配所有的 less 文件
         use: [
-          'cache-loader',
           'style-loader',
           'css-loader',
           'postcss-loader',
