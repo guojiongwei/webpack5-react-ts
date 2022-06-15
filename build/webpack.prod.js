@@ -3,8 +3,25 @@ const path = require('path')
 const { merge } = require('webpack-merge')
 const baseConfig = require('./webpack.base.js')
 const CopyPlugin = require('copy-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+
 module.exports = merge(baseConfig, {
   mode: 'production',
+  module: { 
+    rules: [
+      // ...
+      {
+        test: /\.(css|less)$/, //匹配所有的 css和less 文件
+        use: [
+          'cache-loader',
+          MiniCssExtractPlugin.loader, // 打包环境抽离css
+          'css-loader',
+          'postcss-loader',
+          'less-loader'
+        ]
+      },
+    ]
+  },
   plugins: [
     // 复制文件插件
     new CopyPlugin({
@@ -17,6 +34,10 @@ module.exports = merge(baseConfig, {
           }
         },
       ],
+    }),
+    // 抽离css插件
+    new MiniCssExtractPlugin({
+      filename: 'static/css/[name].[contenthash:8].css'
     }),
   ]
 })

@@ -17,5 +17,19 @@ module.exports = merge(baseConfig, {
       directory: path.join(__dirname, "../public"),
     }
   },
-  devtool: 'cheap-module-source-map'
+  devtool: 'cheap-module-source-map',
+  module: {
+    rules: [
+      {
+        test: /\.(css|less)$/, //匹配所有的 less 文件
+        use: [
+          'cache-loader',
+          'style-loader',
+          'css-loader',
+          'postcss-loader',
+          'less-loader'
+        ]
+      },
+    ]
+  }
 })

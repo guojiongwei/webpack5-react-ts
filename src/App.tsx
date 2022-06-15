@@ -2,9 +2,8 @@ import React from 'react'
 import smallImg from '@/assets/imgs/5kb.png'
 import bigImg from '@/assets/imgs/22kb.png'
 import Class from '@/Class'
-import css from '@/app.css'
-import less from '@/app.less'
-console.log(css, less)
+import '@/app.css'
+import '@/app.less'
 function App() {
   return (
     <>

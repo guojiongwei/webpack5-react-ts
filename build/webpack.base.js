@@ -1,13 +1,9 @@
 // webpack.base.js
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 const TerserPlugin = require('terser-webpack-plugin');
 const webpack = require('webpack');
-
-console.log('NODE_ENV', process.env.NODE_ENV)
-console.log('BASE_ENV', process.env.BASE_ENV)
 
 module.exports = {
   // 入口文件
@@ -25,15 +21,6 @@ module.exports = {
       {
         test: /\.(ts|tsx)$/,
         use: 'babel-loader?cacheDirectory=true'
-      },
-      {
-        test: /\.(css|less)$/, //匹配所有的 less 文件
-        use: [
-          'style-loader',
-          'css-loader',
-          'postcss-loader',
-          'less-loader'
-        ]
       },
       {
         test:/\.(png|jpg|jpeg|gif|svg)$/,
@@ -84,9 +71,6 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, '../public/index.html'),
       inject: true
-    }),
-    new MiniCssExtractPlugin({ // 添加插件
-      filename: 'static/css/[name].[contenthash:8].css'
     }),
     new webpack.DefinePlugin({
       'process.env.BASE_ENV': JSON.stringify(process.env.BASE_ENV)

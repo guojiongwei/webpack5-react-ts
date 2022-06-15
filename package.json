@@ -4,15 +4,14 @@
   "description": "使用webpack5搭建react+ts开发和打包环境",
   "main": "index.js",
   "scripts": {
-    "dev:dev": "cross-env NODE_ENV=development BASE_ENV=development webpack-dev-server -c build/webpack.dev.js",
-    "dev:test": "cross-env NODE_ENV=development BASE_ENV=test webpack-dev-server -c build/webpack.dev.js",
-    "dev:pre": "cross-env NODE_ENV=development BASE_ENV=pre webpack-dev-server -c build/webpack.dev.js",
-    "dev:prod": "cross-env NODE_ENV=development BASE_ENV=production webpack-dev-server -c build/webpack.dev.js",
-    "build:dev": "cross-env NODE_ENV=production BASE_ENV=development webpack -c build/webpack.prod.js",
-    "build:test": "cross-env NODE_ENV=production BASE_ENV=test webpack -c build/webpack.prod.js",
-    "build:pre": "cross-env NODE_ENV=production BASE_ENV=pre webpack -c build/webpack.prod.js",
-    "build:prod": "cross-env NODE_ENV=production BASE_ENV=production webpack -c build/webpack.prod.js",
-    "build:analy": "cross-env NODE_ENV=production BASE_ENV=production webpack -c build/webpack.analy.js"
+    "dev:dev": "cross-env BASE_ENV=development webpack-dev-server -c build/webpack.dev.js",
+    "dev:test": "cross-env BASE_ENV=test webpack-dev-server -c build/webpack.dev.js",
+    "dev:pre": "cross-env BASE_ENV=pre webpack-dev-server -c build/webpack.dev.js",
+    "dev:prod": "cross-env BASE_ENV=production webpack-dev-server -c build/webpack.dev.js",
+    "build:dev": "cross-env BASE_ENV=development webpack -c build/webpack.prod.js",
+    "build:test": "cross-env BASE_ENV=test webpack -c build/webpack.prod.js",
+    "build:pre": "cross-env BASE_ENV=pre webpack -c build/webpack.prod.js",
+    "build:prod": "cross-env BASE_ENV=production webpack -c build/webpack.prod.js"
   },
   "repository": {
     "type": "git",
@@ -36,6 +35,7 @@
     "@types/react-dom": "^18.0.5",
     "autoprefixer": "^10.4.7",
     "babel-loader": "^8.2.5",
+    "cache-loader": "^4.1.0",
     "copy-webpack-plugin": "^11.0.0",
     "core-js": "^3.23.0",
     "cross-env": "^7.0.3",
