@@ -11,6 +11,7 @@ module.exports = merge(baseConfig, {
     rules: [
       // ...
       {
+        include: [path.resolve(__dirname, '../src')],
         test: /\.(css|less)$/, //匹配所有的 css和less 文件
         use: [
           MiniCssExtractPlugin.loader, // 打包环境抽离css

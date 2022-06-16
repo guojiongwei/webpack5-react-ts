@@ -4,7 +4,6 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 const TerserPlugin = require('terser-webpack-plugin');
 const webpack = require('webpack');
-
 module.exports = {
   // 入口文件
   entry: path.resolve(__dirname, '../src/index.tsx'),
@@ -20,8 +19,9 @@ module.exports = {
   module: {
     rules: [
       {
+        include: [ path.resolve(__dirname, '../src') ],
         test: /\.(ts|tsx)$/,
-        use: 'babel-loader'
+        use: ['thread-loader', 'babel-loader']
       },
       {
         test:/\.(png|jpg|jpeg|gif|svg)$/,
@@ -66,7 +66,8 @@ module.exports = {
     extensions: ['.tsx', '.ts', '.js', '.jsx'],
     alias: {
       '@': path.resolve(__dirname, '../src')
-    }
+    },
+    modules: [path.resolve(__dirname, '../node_modules')],
   },
   plugins: [
     new HtmlWebpackPlugin({

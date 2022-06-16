@@ -17,7 +17,7 @@ module.exports = merge(baseConfig, {
       directory: path.join(__dirname, "../public"),
     }
   },
-  devtool: 'cheap-module-source-map',
+  devtool: 'eval-cheap-module-source-map',
   module: {
     rules: [
       {

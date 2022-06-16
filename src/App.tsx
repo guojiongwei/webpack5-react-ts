@@ -4,6 +4,7 @@ import bigImg from '@/assets/imgs/22kb.png'
 import Class from '@/Class'
 import '@/app.css'
 import '@/app.less'
+console.log(111)
 function App() {
   return (
     <>
