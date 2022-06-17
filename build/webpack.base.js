@@ -1,8 +1,6 @@
 // webpack.base.js
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
-const TerserPlugin = require('terser-webpack-plugin');
 const webpack = require('webpack');
 module.exports = {
   // 入口文件
@@ -81,11 +79,5 @@ module.exports = {
   // 开启webpack持久化存储缓存
   cache: {
     type: 'filesystem', // 使用文件缓存
-  },
-  optimization: {
-    minimizer: [
-      new CssMinimizerPlugin(),
-      new TerserPlugin(),
-    ],
   },
 }

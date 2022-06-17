@@ -12,7 +12,10 @@ class Class extends PureComponent {
 
   render() {
     return (
-      <h2>我是类组件---{this.age}</h2>
+     <>
+      <h2>我是类1组件---{this.age}</h2>
+     </>
+     
     )
   }
 }
