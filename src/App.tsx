@@ -1,36 +1,34 @@
-import React, { useEffect, useState } from 'react'
-import smallImg from '@/assets/imgs/5kb.png'
-import bigImg from '@/assets/imgs/22kb.png'
-import Class from '@/components/Class'
-import { Demo1, Demo2 } from '@/components'
-import '@/app.css'
-import '@/app.less'
+import React, { lazy, Suspense, useState } from 'react'
+
+// prefetch
+const PreFetchDemo = lazy(() => import(
+  /* webpackChunkName: "PreFetchDemo" */
+  /*webpackPrefetch: true*/
+  '@/components/PreFetchDemo'
+))
+// preload
+const PreloadDemo = lazy(() => import(
+  /* webpackChunkName: "PreloadDemo" */
+  /*webpackPreload: true*/
+  '@/components/PreloadDemo'
+ ))
 
 function App() {
-  const [ count, setCounts ] = useState(0)
-  
+  const [ show, setShow ] = useState(false)
 
-  useEffect(() => {
-    console.log(1333121)
-  }, [])
-
-  const onChange = (e: any) => {
-    setCounts(e.target.value*1)
+  const onClick = () => {
+    setShow(true)
   }
   return (
     <>
-      <h2>我是修改后的文本</h2>
-      <img src={smallImg} alt="小于10kb的图片" />
-      <img src={bigImg} alt="大于于10kb的图片" />
-      <div className='smallImg'></div>
-      <div className='bigImg'></div>
-      <Class />
-      <p>受控组件</p>
-      <input type="text" value={count} onChange={onChange} />
-      <br />
-      <p>非受控组件</p>
-      <input type="text" />
-      <Demo1 />
+      <h2 onClick={onClick}>展示</h2>
+      {/* show为true时加载组件 */}
+      { show && (
+        <>
+          <Suspense fallback={null}><PreloadDemo /></Suspense>
+          <Suspense fallback={null}><PreFetchDemo /></Suspense>
+        </>
+      ) }
     </>
   )
 }
