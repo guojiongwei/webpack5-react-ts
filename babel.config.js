@@ -1,4 +1,4 @@
-const isDevelopment = process.env.NODE_ENV !== 'production';
+const isDev = process.env.NODE_ENV === 'development';
 
 module.exports = {
   // 执行顺序由右往左，所以先处理ts，再处理jsx,最后再试一下babel转换为低版本语法
@@ -19,8 +19,7 @@ module.exports = {
     "@babel/preset-typescript"
   ],
   "plugins": [
-    
-    isDevelopment && require.resolve('react-refresh/babel'),
+    isDev && require.resolve('react-refresh/babel'),
     [
       "@babel/plugin-proposal-decorators", { "legacy": true }
     ]

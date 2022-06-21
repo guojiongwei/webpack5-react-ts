@@ -1,4 +1,5 @@
 import React, { lazy, Suspense, useState } from 'react'
+import './app.less'
 
 // prefetch
 const PreFetchDemo = lazy(() => import(

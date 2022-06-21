@@ -23,5 +23,5 @@
       ]
     }
   },
-  "include": ["./src"]
+  "include": ["./src/**/*.ts", "./src/**/*.tsx"]
 }

@@ -12,21 +12,6 @@ const glob = require('glob')
 
 module.exports = merge(baseConfig, {
   mode: 'production',
-  module: { 
-    rules: [
-      // ...
-      {
-        include: [path.resolve(__dirname, '../src')],
-        test: /\.(css|less)$/, //匹配所有的 css和less 文件
-        use: [
-          MiniCssExtractPlugin.loader, // 打包环境抽离css
-          'css-loader',
-          'postcss-loader',
-          'less-loader'
-        ]
-      },
-    ]
-  },
   plugins: [
     // 复制文件插件
     new CopyPlugin({

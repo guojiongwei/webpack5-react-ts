@@ -19,19 +19,6 @@ module.exports = merge(baseConfig, {
     }
   },
   devtool: 'eval-cheap-module-source-map',
-  module: {
-    rules: [
-      {
-        test: /\.(css|less)$/, //匹配所有的 less 文件
-        use: [
-          'style-loader',
-          'css-loader',
-          'postcss-loader',
-          'less-loader'
-        ]
-      },
-    ]
-  },
   plugins: [
     new ReactRefreshWebpackPlugin(),
   ]
