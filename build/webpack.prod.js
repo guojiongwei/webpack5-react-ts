@@ -29,12 +29,14 @@ module.exports = merge(baseConfig, {
     new MiniCssExtractPlugin({
       filename: 'static/css/[name].[contenthash:8].css'
     }),
+    // 去除没用到的css插件
     new PurgeCSSPlugin({
       paths: glob.sync(`${path.join(__dirname, '../src')}/**/*`,  { nodir: true }),
       safelist: {
         standard: [/^ant-/],
       }
     }),
+    // 打包生成gzip插件
     new CompressionPlugin({
       test: /\.(js|css)$/, // 只生成css,js压缩文件
       filename: '[path][base].gz', // 文件命名
@@ -44,9 +46,12 @@ module.exports = merge(baseConfig, {
       minRatio: 0.8 // 压缩率,默认值是 0.8
     })
   ],
+  // 优化配置
   optimization: {
     minimizer: [
+      // 压缩css
       new CssMinimizerPlugin(),
+      // 压缩js
       new TerserPlugin({
         parallel: true, // 开启多线程压缩
         terserOptions: {

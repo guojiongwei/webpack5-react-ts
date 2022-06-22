@@ -18,12 +18,22 @@ module.exports = {
   },
   module: {
     rules: [
-      // {
-      //   oneOf: [
+      {
+        oneOf: [
           {
-            test: /\.(css|less)$/, //匹配所有的 less 文件
+            test: /\.css$/, //匹配所有的 less 文件
             enforce: 'pre',
-            include: [ path.resolve(__dirname, '../src') ],
+            include: [path.resolve(__dirname, '../src')],
+            use: [
+              isDev ? 'style-loader' : MiniCssExtractPlugin.loader,
+              'css-loader',
+              'postcss-loader',
+            ]
+          },
+          {
+            test: /\.less$/, //匹配所有的 less 文件
+            enforce: 'pre',
+            include: [path.resolve(__dirname, '../src')],
             use: [
               isDev ? 'style-loader' : MiniCssExtractPlugin.loader,
               'css-loader',
@@ -33,7 +43,7 @@ module.exports = {
           },
           {
             test: /\.(ts|tsx)$/,
-            include: [ path.resolve(__dirname, '../src') ],
+            include: [path.resolve(__dirname, '../src')],
             enforce: 'pre',
             use: ['thread-loader', 'babel-loader']
           },
@@ -75,8 +85,8 @@ module.exports = {
             },
           },
         ]
-    //   }
-    // ]
+      }
+    ]
   },
   resolve: {
     extensions: ['.js', '.tsx', '.ts'],

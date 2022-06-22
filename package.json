@@ -1,7 +1,7 @@
 {
   "name": "webpack5-react-ts",
   "version": "1.0.0",
-  "description": "使用webpack5搭建react+ts开发和打包环境",
+  "description": "使用webpack5从零搭建完整的react18+ts构建环境",
   "main": "index.js",
   "scripts": {
     "dev:dev": "cross-env NODE_ENV=development BASE_ENV=development webpack-dev-server -c build/webpack.dev.js",
@@ -49,7 +49,6 @@
     "mini-css-extract-plugin": "^2.6.1",
     "postcss": "^8.4.14",
     "postcss-loader": "^7.0.0",
-    "progress-bar-webpack-plugin": "^2.1.0",
     "purgecss-webpack-plugin": "^4.1.3",
     "react-refresh": "^0.14.0",
     "speed-measure-webpack-plugin": "^1.5.0",
