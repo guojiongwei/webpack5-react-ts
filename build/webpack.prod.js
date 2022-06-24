@@ -31,10 +31,7 @@ module.exports = merge(baseConfig, {
     }),
     // 去除没用到的css插件
     new PurgeCSSPlugin({
-      paths: glob.sync(`${path.join(__dirname, '../src')}/**/*`,  { nodir: true }),
-      safelist: {
-        standard: [/^ant-/],
-      }
+      paths: glob.sync(`${path.join(__dirname, '../src')}/**/*.tsx`, { nodir: true }),
     }),
     // 打包生成gzip插件
     new CompressionPlugin({
