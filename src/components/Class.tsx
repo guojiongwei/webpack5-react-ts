@@ -9,15 +9,16 @@ function addAge(Target: Function) {
 class Class extends PureComponent {
 
   age?: number
+  aaaaaaaaa?: number
 
   render() {
     return (
      <>
-      <h2>我是类1组件---{this.age}</h2>
+      <h2>我是类1组件---{this.age}----{this.aaaaaaaaa}</h2>
      </>
      
     )
   }
 }
-
+Class.prototype.aaaaaaaaa = 1111
 export default Class

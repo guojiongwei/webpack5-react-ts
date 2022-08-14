@@ -1,6 +1,7 @@
 import React, { lazy, Suspense, useState } from 'react'
 import smallImg from './assets/imgs/5kb.png'
 import bigImg from './assets/imgs/22kb.png'
+import Class from './components/Class'
 import './app.less'
 
 // prefetch
@@ -19,12 +20,13 @@ const PreloadDemo = lazy(() => import(
 function App() {
   const [ show, setShow ] = useState(false)
 
-  const onClick = () => {
+  const onClickSSSSSSS = () => {
     setShow(true)
   }
   return (
     <>
-      <h2 onClick={onClick}>展示</h2>
+      <h2 onClick={onClickSSSSSSS}>展示</h2>
+      <Class />
       {/* show为true时加载组件 */}
       { show && (
         <>
